@@ -38,7 +38,7 @@ $usuario = $_SESSION["usuario"];
                     $urll = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
                     $cod = base64_encode($urll);
                     $idconsulta = $_GET["consulid"];
-                    $consulta = mysql_query("select id_consulta as consulid,tipo_consulta as tipoc,tipo_modalidad as modalidad,DATE_FORMAT(fecha_creacion,'%H:%i %d/%m/%Y') as fechacreada,descripcion as descrip,nombre as nombre,email as email,telf as telf,idioma as idioma,usuario_creado as user,localidad as localidad,curso as curso,capacidad_aula capac,dia_alquiler as dias from consulta WHERE id_consulta='" . $idconsulta . "'") or die("no se puede conectar ni recibir valores");
+                    $consulta = mysql_query("select id_consulta as consulid,tipo_consulta as tipoc,tipo_modalidad as modalidad,DATE_FORMAT(fecha_creacion,'%H:%i %d/%m/%Y') as fechacreada,descripcion as descrip,nombre as nombre,email as email,telf as telf,idioma as idioma,usuario_creado as user,localidad as localidad,curso as curso,capacidad_aula capac,dia_alquiler as dias,horario_alquiler horarios from consulta WHERE id_consulta='" . $idconsulta . "'") or die("no se puede conectar ni recibir valores");
                     $registro = mysql_fetch_object($consulta);
                     echo"<h1>Datos Consulta</h1>";
                     echo "<div class='columna'>";
@@ -49,11 +49,11 @@ $usuario = $_SESSION["usuario"];
                     echo"</table>";
                     echo"<h1>Datos Consultante</h1>";
                     echo"<table>";
-                    echo "<td><label class='bold'>Nombre:</label> " . $registro->nombre . "</td>";
-                    echo "<td><label class='bold'>Telf:</label> " . $registro->telf . "</td>";
-                    echo "<td><label class='bold'>Email:</label> " . $registro->email . "</td>";
-                    echo "<td><label class='bold'>Idioma:</label> " . $registro->idioma . "</td>";
-                    echo "<td><label class='bold'>Localidad:</label> " . $registro->localidad . "</td>";
+                    echo "<td><label class='bold'>Nombre:</label><br> " . $registro->nombre . "</td>";
+                    echo "<td><label class='bold'>Telf:</label><br> " . $registro->telf . "</td>";
+                    echo "<td><label class='bold'>Email:</label><br> " . $registro->email . "</td>";
+                    echo "<td><label class='bold'>Idioma:</label><br> " . $registro->idioma . "</td>";
+                    echo "<td><label class='bold'>Localidad:</label><br> " . $registro->localidad . "</td>";
                     echo"</table>";
                     echo"<h1>Informaci&#243;n de la Consulta</h1>";
                     echo"<table>";
@@ -74,7 +74,7 @@ $usuario = $_SESSION["usuario"];
                      if($registro->tipoc == "Alquiler"){
                          echo "<td><label class='bold'>Capacidad Aula:</label><br> " . $registro->capac . "</td>"; 
                          echo "<td><label class='bold'>Dias:</label><br> " . $registro->dias . "</td>"; 
-                         echo "<td><label class='bold'>Horario:</label><br>fdasfsa</td>";
+                         echo "<td><label class='bold'>Horario:</label><br> " . $registro->horarios . "</td>";
                        
                     }
                     echo"</table>";
@@ -106,9 +106,10 @@ $usuario = $_SESSION["usuario"];
                     desconectar();
                     ?>
                 </table>
+                
                 <p></p>
                 <form id="idform" enctype="multipart/form-data" action="updateConsulta.php" method="GET">
-                    <label>Descripci&#243;n de la consulta</label><br><br> <textarea name='actu' rows="2" cols="45" autocomplete="off" required></textarea><br><br>
+                    <label>Actualizaci&#243;n consulta</label><br><br> <textarea name='actu' rows="2" cols="45" autocomplete="off" required></textarea><br><br>
                     <input type="hidden" name="consulid" value="<?php echo $idconsulta; ?>">
                     <input type="hidden" name="volver" value="<?php echo $cod; ?>">
                     <input value="Actualizar" style="font-weight:bold;font-size:20px;height: 35px; width: 150px" type="submit">

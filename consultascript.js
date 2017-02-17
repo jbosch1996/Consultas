@@ -24,11 +24,25 @@ function regladarequired() {
     }
 }
 function showsolucion() {
-        $('input[name=radiocheck]').one('click', function () { 
+        $('input[name=radiocheck]').click(function () { 
         if ($('input[id=mostrarcheck]').is(':checked')) {
             var checksolu = $("<textarea id='divsolucion' name='solu' rows='2' cols='45' autocomplete='off' required></textarea>");
             $("#consulta").append(checksolu);
             
+        }else{
+            $("#divsolucion").remove();
+        }
+    });
+}
+;
+function showInputOtros() {
+        $('input[name=nameOtros]').click(function () { 
+        if ($('input[id=otrosCheck]').is(':checked')) {
+            var inputOtros = $("<input id='idOtros'type='text' name='cic[]' placeholder='Introduce otro curso' required></input>");
+            $(inputOtros).insertAfter("#showInput");
+            
+        }else{
+            $("#idOtros").remove();
         }
     });
 }
@@ -60,11 +74,12 @@ $(document).ready(function () {
         }
         if (this.id == "mostrar2") {
             var tipomod = $("<p></p><label>Tipo de modalidad<label><br><input id='requiredMod'type ='radio' name='tmod' value='Presencial' required><label>Presencial</label> <input type ='radio' name='tmod' value='No Presencial'><label>No Presencial</label> <input type ='radio' name='tmod' value='Ambas'><label>Ambas</label><br><p></p>");
-            var ForNoregl = $("<p></p><label>Formaci&#243n</label></br><div align='left'><input type ='checkbox' name='cic[]' value='Acceso a Grado Superior' class='cicselect'><label>Acceso a Grado Superior</label><br><input type ='checkbox' name='cic[]' value='Acceso Universidad' class='cicselect'><label>Acceso Universidad</label><br></div>");
+            var ForNoregl = $("<p></p><label>Formaci&#243n</label></br><div id='showInput'align='left'><input type ='checkbox' name='cic[]' value='Acceso a Grado Superior' class='cicselect'><label>Acceso a Grado Superior</label><br><input type ='checkbox' name='cic[]' value='Acceso Universidad' class='cicselect'><label>Acceso Universidad</label><br><input id='otrosCheck' name='nameOtros' type ='checkbox'class='cicselect'><label>Otro</label></div>");
             var descripcion = $("<p></p><label>Descripci&oacute;n de la consulta</label><br> <textarea name='desconsulta' rows='2' cols='45' autocomplete='off' required></textarea><br><p></p>");
             var solucion = $("<input id='mostrarcheck' name='radiocheck' type='checkbox'><label>Soluci&#243;n</label><br>");
             $("#consulta").append(tipomod);
             $("#consulta").append(ForNoregl);
+            showInputOtros();
             $("#consulta").append(descripcion);
             $("#consulta").append(solucion);
             showsolucion();
@@ -73,7 +88,7 @@ $(document).ready(function () {
         if (this.id == "mostrar3") {
             var descripcion = $("<p></p><label>Descripci&oacute;n de la consulta</label><br> <textarea name='desconsulta' rows='2' cols='45' autocomplete='off' required></textarea><br><p></p>");
             var solucion = $("<div id='divsolu'><input id='mostrarcheck' name='radiocheck' type='checkbox'><label>Solución</label></div><div id='solucion' style='display:none'><label>Soluci&oacute;n de la consulta</label><br> <textarea name='solu' rows='2' cols='45' autocomplete='off'></textarea><br><p></p>");
-            var alquiler = $("<br> <p></p><label>Capacidad Aula</label><br><input type='text' name='capac'><br><br><label>Dias</label><br><input type ='checkbox' name='dia[]' value='L' class='diaselect'><label>Lunes</label><input type ='checkbox' name='dia[]' value='M' class='diaselect'><label>Martes</label><input type ='checkbox' name='dia[]' value='MI' class='diaselect'><label>Mi&#233;rcoles</label><input type ='checkbox' name='dia[]' value='J' class='diaselect'><label>Jueves</label><input type ='checkbox' name='dia[]' value='V' class='diaselect'><label>Viernes</label><br><br>");
+            var alquiler = $("<br> <p></p><label>Capacidad Aula</label><br><input type='text' name='capac'><br><br><label>Dias</label><br><input type ='checkbox' name='dia[]' value='L' class='diaselect'><label>Lunes</label><input type ='checkbox' name='dia[]' value='M' class='diaselect'><label>Martes</label><input type ='checkbox' name='dia[]' value='MI' class='diaselect'><label>Mi&#233;rcoles</label><input type ='checkbox' name='dia[]' value='J' class='diaselect'><label>Jueves</label><input type ='checkbox' name='dia[]' value='V' class='diaselect'><label>Viernes</label><br><br><p></p><label>Horas</label><br><input type ='radio' name='horas' value='Ma&#241;anas' required><label>Ma&#241;anas</label> <input type ='radio' name='horas' value='Tarde'><label>Tarde</label> <input type ='radio' name='horas' value='Entero'><label>Entero</label><br><p></p>");
             var solucion = $("<input id='mostrarcheck' name='radiocheck' type='checkbox'><label>Soluci&#243;n</label><br>");
             $("#consulta").append(alquiler);
             $("#consulta").append(descripcion);
@@ -81,7 +96,7 @@ $(document).ready(function () {
             showsolucion();
         }
         if (this.id == "mostrar4") {
-            var opos = $("<br><p></p><label>Formaci&#243n</label><br><div align='left'><input type ='checkbox' name='cic[]' value='Oposición Bombero' class='cicselect'>Oposici&#243;n Bombero<br><input type ='checkbox' name='cic[]' value='Oposición Auxiliar Infermeria' class='cicselect'><label>Oposici&#243;n Auxiliar Infermeria</label><br></div>");
+            var opos = $("<br><p></p><label>Formaci&#243n</label><br><div align='left'><input type ='checkbox' name='cic[]' value='Oposici&oacute;n Bombero' class='cicselect'>Oposici&#243;n Bombero<br><input type ='checkbox' name='cic[]' value='Oposici&oacute;n Auxiliar Infermeria' class='cicselect'><label>Oposici&#243;n Auxiliar Infermeria</label><br><input type ='checkbox' name='cic[]' value='Oposici&#243;n de Infermeria' class='cicselect'>Oposici&#243;n de Infermeria</div>");
             var descripcion = $("<p></p><label>Descripci&oacute;n de la consulta</label><br> <textarea name='desconsulta' rows='2' cols='45' autocomplete='off' required></textarea><br><p></p>");
             var solucion = $("<input id='mostrarcheck' name='radiocheck' type='checkbox'><label>Soluci&#243;n</label><br>");
             $("#consulta").append(opos);

@@ -32,6 +32,11 @@ if (isset($_POST['dia'])) {
 } else {
     $dias = null;
 }
+if (isset($_POST['horas'])) {
+    $horas = $_POST['horas'];
+} else {
+    $horas = null;
+}
 if (!isset($_POST['solu'])) {
     $cerrada = 0;
 } else {
@@ -41,10 +46,10 @@ if (!isset($_POST['solu'])) {
 $date = new DateTime();
 $rdate = $date->format('Y-m-d H:i:s');
 if ($cerrada == 0) {
-    $consulta = mysql_query("insert into consulta (usuario_creado,fecha_creacion,estado_consulta,nombre,email,localidad,cp,tipo_consulta,idioma,descripcion,codigo_web,curso,capacidad_aula,dia_alquiler,telf,tipo_contacto,tipo_modalidad) values ('".$usuario."','" . $rdate . "','" . $cerrada . "','" . $_POST['nombrec'] . "','" . $_POST['email'] . "','" . $_POST['localidad'] . "','" . $_POST['cp'] . "','" . $_POST['tipoc'] . "','" . $_POST['idioma'] . "','" . $_POST['desconsulta'] . "','" . $codWeb . "','" . $ciclos . "','" . $capac . "','" . $dias . "','" . $telf . "','" . $_POST['medioc'] . "','" . $_POST['tmod'] . "')");
+    $consulta = mysql_query("insert into consulta (usuario_creado,fecha_creacion,estado_consulta,nombre,email,localidad,cp,tipo_consulta,idioma,descripcion,codigo_web,curso,capacidad_aula,dia_alquiler,telf,tipo_contacto,tipo_modalidad,horario_alquiler) values ('".$usuario."','" . $rdate . "','" . $cerrada . "','" . $_POST['nombrec'] . "','" . $_POST['email'] . "','" . $_POST['localidad'] . "','" . $_POST['cp'] . "','" . $_POST['tipoc'] . "','" . $_POST['idioma'] . "','" . $_POST['desconsulta'] . "','" . $codWeb . "','" . $ciclos . "','" . $capac . "','" . $dias . "','" . $telf . "','" . $_POST['medioc'] . "','" . $_POST['tmod'] . "','".$horas."')");
 }
 if ($cerrada == 1) {
-    $consulta = mysql_query("insert into consulta (usuario_creado,usuario_cerrado,fecha_cierre,fecha_creacion,estado_consulta,nombre,email,localidad,cp,tipo_consulta,idioma,descripcion,codigo_web,curso,capacidad_aula,dia_alquiler,telf,tipo_contacto,solucion,tipo_modalidad) values ('".$usuario."','".$usuario."','".$rdate."','" . $rdate . "','" . $cerrada . "','" . $_POST['nombrec'] . "','" . $_POST['email'] . "','" . $_POST['localidad'] . "','" . $_POST['cp'] . "','" . $_POST['tipoc'] . "','" . $_POST['idioma'] . "','" . $_POST['desconsulta'] . "','" . $codWeb . "','" . $ciclos . "','" . $capac . "','" . $dias . "','" . $telf . "','" . $_POST['medioc'] . "','" . $_POST['solu'] . "','" . $_POST['tmod'] . "')");
+    $consulta = mysql_query("insert into consulta (usuario_creado,usuario_cerrado,fecha_cierre,fecha_creacion,estado_consulta,nombre,email,localidad,cp,tipo_consulta,idioma,descripcion,codigo_web,curso,capacidad_aula,dia_alquiler,telf,tipo_contacto,solucion,tipo_modalidad,horario_alquiler) values ('".$usuario."','".$usuario."','".$rdate."','" . $rdate . "','" . $cerrada . "','" . $_POST['nombrec'] . "','" . $_POST['email'] . "','" . $_POST['localidad'] . "','" . $_POST['cp'] . "','" . $_POST['tipoc'] . "','" . $_POST['idioma'] . "','" . $_POST['desconsulta'] . "','" . $codWeb . "','" . $ciclos . "','" . $capac . "','" . $dias . "','" . $telf . "','" . $_POST['medioc'] . "','" . $_POST['solu'] . "','" . $_POST['tmod'] . "','".$horas."')");
 }
 
 if (!$consulta) {

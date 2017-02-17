@@ -119,7 +119,7 @@ $usuario = $_SESSION["usuario"];
                     <div id="consulta">           
 
                     </div>
-                    <br><br>
+                    <br><br>  
                     <!--Boton Submit to add.consulta.php-->
                 </div>
                 <br><br>
